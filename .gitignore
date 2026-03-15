@@ -6,6 +6,8 @@ question_bank_from_pdf.json
 answers_general.json
 answers_*.json
 state_answers_*.json
+questions_candidate.json
+update_report.md
 
 # Downloaded PDF — fetched automatically by parse_pdf_questions.py
 gesamtfragenkatalog-lebenindeutschland.pdf

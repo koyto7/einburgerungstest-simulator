@@ -8,7 +8,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write  # needed to commit questions.json back to the repo
+  contents: write
+  pull-requests: write
 
 jobs:
   update:
@@ -81,17 +82,76 @@ jobs:
               "$state" 1 10 "./state_answers_${safe}.json"
           done
 
-      - name: Merge → questions.json
-        run: uv run python scripts/merge_question_bank.py
-
-      # ── Commit ──────────────────────────────────────────────────────────────
-      - name: Commit updated questions.json
+      # ── Diff-based update ──────────────────────────────────────────────────
+      - name: Compare scraped data with current questions.json
+        id: update
         run: |
-          git config user.name  "github-actions[bot]"
+          uv run python scripts/update_questions.py; EXIT_CODE=$?
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          elif [ $EXIT_CODE -eq 2 ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "validation_failed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "validation_failed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # ── Validate current questions.json (always, as a safety net) ──────────
+      - name: Validate questions.json
+        if: steps.update.outputs.changed == 'true'
+        run: uv run python scripts/validate_questions.py
+
+      # ── Create PR if changes detected ──────────────────────────────────────
+      - name: Create update PR
+        if: steps.update.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH="chore/update-questions-$(date -u +%Y-%m-%d)"
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Create branch and commit
+          git checkout -b "$BRANCH"
           git add questions.json
-          # Only commit if questions.json actually changed
-          git diff --cached --quiet && echo "No changes." || \
-            git commit -m "chore: update questions.json [$(date -u +%Y-%m-%d)]"
-          git pull --rebase origin main
-          git push
+          git diff --cached --quiet && { echo "No changes to commit."; exit 0; }
+
+          git commit -m "chore: update questions.json [$(date -u +%Y-%m-%d)]"
+          git push -u origin "$BRANCH"
+
+          # Build PR body from update report
+          VALIDATION_NOTE=""
+          if [ "${{ steps.update.outputs.validation_failed }}" = "true" ]; then
+            VALIDATION_NOTE="⚠️ **Validation failed on the candidate** — review errors in the workflow log before merging."
+          fi
+
+          REPORT_BODY=""
+          if [ -f update_report.md ]; then
+            REPORT_BODY=$(cat update_report.md)
+          fi
+
+          gh pr create \
+            --title "chore: update questions.json ($(date -u +%Y-%m-%d))" \
+            --body "$(cat <<EOF
+          ## Automated Questions Update
+
+          This PR was created automatically by the monthly scraping pipeline.
+
+          ${VALIDATION_NOTE}
+
+          ${REPORT_BODY}
+
+          ---
+          **Review checklist:**
+          - [ ] Check the diff report above for unexpected changes
+          - [ ] Verify no correct answers were changed incorrectly
+          - [ ] Confirm new questions (if any) have all required fields
+          - [ ] Validation passed (check workflow logs)
+          EOF
+          )" \
+            --label "automated"
+
+      - name: No changes summary
+        if: steps.update.outputs.changed == 'false'
+        run: echo "✅ questions.json is up to date — no PR needed."

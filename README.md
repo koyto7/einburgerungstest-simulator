@@ -88,7 +88,8 @@ questions.json                      # Question bank (committed, updated monthly 
 scripts/
   parse_pdf_questions.py            # Download PDF + extract questions
   extract_answers_chunked.js        # Scrape correct answers from oet.bamf.de
-  merge_question_bank.py            # Merge PDF questions + scraped answers
+  update_questions.py               # Diff-based update: merge, compare, validate, apply
+  validate_questions.py             # Quality checks for questions.json
 .github/workflows/
   update-questions.yml              # Monthly CI workflow
 ```
