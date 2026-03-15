@@ -4677,9 +4677,9 @@
     "question": "Wie wurden die Bundesrepublik Deutschland und die DDR zu einem Staat?",
     "options": [
       "Die Bundesrepublik hat die DDR besetzt.",
-      "Die heutigen fünf östlichen Bundesländer sind der Bundesrepublik",
-      "Deutschland beigetreten.",
-      "Die westlichen Bundesländer sind der DDR beigetreten."
+      "Die heutigen fünf östlichen Bundesländer sind der Bundesrepublik Deutschland beigetreten.",
+      "Die westlichen Bundesländer sind der DDR beigetreten.",
+      "Die DDR hat die Bundesrepublik Deutschland besetzt."
     ],
     "isImageQuestion": false,
     "correctIndex": 1,
