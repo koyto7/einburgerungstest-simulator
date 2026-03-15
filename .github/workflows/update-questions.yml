@@ -93,4 +93,5 @@ jobs:
           # Only commit if questions.json actually changed
           git diff --cached --quiet && echo "No changes." || \
             git commit -m "chore: update questions.json [$(date -u +%Y-%m-%d)]"
+          git pull --rebase origin main
           git push
