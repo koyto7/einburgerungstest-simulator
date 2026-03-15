@@ -9,7 +9,9 @@
     "scrape:general": "node scripts/extract_answers_chunked.js \"Nordrhein-Westfalen\" 1 300 ./answers_general.json",
     "scrape:state": "node scripts/extract_answers_chunked.js",
     "merge": "python3 scripts/merge_question_bank.py",
-    "parse-pdf": "python3 scripts/parse_pdf_questions.py"
+    "parse-pdf": "python3 scripts/parse_pdf_questions.py",
+    "validate": "python3 scripts/validate_questions.py",
+    "update": "python3 scripts/update_questions.py"
   },
   "dependencies": {
     "playwright": "^1.58.2"
