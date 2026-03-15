@@ -172,13 +172,61 @@
         color: var(--muted);
         font-size: 0.98rem;
       }
+      .topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+      }
       .theme-toggle {
         background: var(--surface);
         border: 1px solid var(--border);
         color: var(--text);
         border-radius: 999px;
-        padding: 10px 14px;
+        width: 44px;
+        height: 44px;
         min-height: 44px;
+        padding: 0;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+      }
+      .hamburger {
+        display: none;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+        border-radius: 14px;
+        width: 44px;
+        height: 44px;
+        min-height: 44px;
+        padding: 0;
+        place-items: center;
+        flex-shrink: 0;
+      }
+      .sidebar-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 98;
+      }
+      .sidebar-close {
+        display: none;
+        background: transparent;
+        border: none;
+        color: var(--text);
+        padding: 4px;
+        margin-left: auto;
+        cursor: pointer;
+      }
+      .sidebar-top {
+        display: none;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+      .sidebar-top .label {
+        margin: 0;
       }
       .layout {
         display: grid;
@@ -538,7 +586,31 @@
           grid-template-columns: 1fr;
         }
         .sidebar {
-          position: static;
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: min(300px, 88vw);
+          z-index: 99;
+          overflow-y: auto;
+          border-radius: 0 var(--radius) var(--radius) 0;
+          border-left: none;
+        }
+        .sidebar-open .sidebar {
+          display: block;
+        }
+        .sidebar-open .sidebar-backdrop {
+          display: block;
+        }
+        .hamburger {
+          display: grid;
+        }
+        .sidebar-top {
+          display: flex;
+        }
+        .sidebar-close {
+          display: block;
         }
         .hero-grid,
         .grid.two,
@@ -604,17 +676,36 @@
             </div>
           </div>
         </div>
-        <button
-          class="theme-toggle"
-          id="themeToggle"
-          aria-label="Theme wechseln"
-        >
-          Darstellung wechseln
-        </button>
+        <div class="topbar-actions">
+          <button
+            class="hamburger"
+            id="hamburgerBtn"
+            aria-label="Menü öffnen"
+            aria-expanded="false"
+            aria-controls="sidebar"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="Theme wechseln"
+          ></button>
+        </div>
       </header>
 
       <div class="layout">
-        <aside class="panel sidebar">
+        <aside class="panel sidebar" id="sidebar">
+          <div class="sidebar-top">
+            <span class="label">Menü</span>
+            <button class="sidebar-close" id="sidebarClose" aria-label="Menü schließen">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <path d="M18 6 6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
           <div class="controls">
             <div>
               <label class="label" for="stateSelect">Bundesland</label>
@@ -675,6 +766,7 @@
           </div>
         </aside>
 
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
         <main class="main" id="main"></main>
       </div>
 
@@ -1097,7 +1189,13 @@
       function themeLabel() {
         const current =
           document.documentElement.getAttribute('data-theme') || 'light';
-        return current === 'dark' ? 'Hellmodus' : 'Dunkelmodus';
+        if (current === 'dark') {
+          // Sun icon – click to switch to light
+          return `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`;
+        } else {
+          // Moon icon – click to switch to dark
+          return `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+        }
       }
 
       function renderNav() {
@@ -1290,24 +1388,37 @@
         `;
       }
 
+      const QUESTIONS_LAST_UPDATED = '15. März 2026';
+      const GITHUB_REPO_URL = 'https://github.com/koyto7/einburgerungstest-simulator';
+
       function renderInfo() {
         return `
-          <section class="panel card">
-            <div class="section-title"><h2>Offizielle Grundlagen</h2></div>
-            <div class="grid">
-              <div class="muted-box">
+          <section class=”panel card”>
+            <div class=”section-title”><h2>Offizielle Grundlagen</h2></div>
+            <div class=”grid”>
+              <div class=”muted-box”>
                 <strong>Was der Simulator nachbildet</strong>
                 <p>Die Simulation verwendet das offizielle Format mit 33 Fragen, davon 30 allgemeine Fragen und 3 landesbezogene Fragen. Bestehen ab 17 richtigen Antworten.</p>
               </div>
-              <div class="muted-box">
+              <div class=”muted-box”>
                 <strong>Wichtiger Hinweis</strong>
                 <p>Die 100 offiziellen Fragebögen werden nicht veröffentlicht. Dieses Tool erzeugt deshalb realistische Prüfungssimulationen aus dem offiziellen Fragenkatalog, bildet aber keinen geheimen Originalbogen nach.</p>
               </div>
-              <div class="source-list">
-                <div><a href="https://www.gesetze-im-internet.de/einbtestv/__1.html" target="_blank" rel="noopener noreferrer">Einbürgerungstestverordnung § 1</a></div>
-                <div><a href="https://www.gesetze-im-internet.de/einbtestv/anlage_1.html" target="_blank" rel="noopener noreferrer">Offizieller Fragenkatalog in Anlage 1</a></div>
-                <div><a href="https://oet.bamf.de/ords/oetut/f?p=514:1:0" target="_blank" rel="noopener noreferrer">BAMF-Fragenkatalog zur Vorbereitung</a></div>
-                <div><a href="https://www.integrationsbeauftragte.de/resource/blob/1864184/2294768/402c323bf40582a4195c2e7026cc4c02/einbuergerung-broschuere-deu-data.pdf?download=1" target="_blank" rel="noopener noreferrer">Broschüre „Mein Weg zum deutschen Pass“</a></div>
+              <div class=”muted-box”>
+                <strong>Fragenkatalog</strong>
+                <p style=”margin:8px 0 0”>Alle 460 Fragen werden monatlich automatisch aus der offiziellen BAMF-Quelle aktualisiert.</p>
+                <p style=”margin:6px 0 0;font-size:0.9rem;color:var(--muted)”>Zuletzt aktualisiert: ${QUESTIONS_LAST_UPDATED}</p>
+              </div>
+              <div class=”muted-box”>
+                <strong>Open Source</strong>
+                <p style=”margin:8px 0 0”>Dieses Tool ist quelloffen. Code, Skripte und Dokumentation sind auf GitHub verfügbar.</p>
+                <p style=”margin:8px 0 0”><a href=”${GITHUB_REPO_URL}” target=”_blank” rel=”noopener noreferrer”>GitHub: koyto7/einburgerungstest-simulator ↗</a></p>
+              </div>
+              <div class=”source-list”>
+                <div><a href=”https://www.gesetze-im-internet.de/einbtestv/__1.html” target=”_blank” rel=”noopener noreferrer”>Einbürgerungstestverordnung § 1</a></div>
+                <div><a href=”https://www.gesetze-im-internet.de/einbtestv/anlage_1.html” target=”_blank” rel=”noopener noreferrer”>Offizieller Fragenkatalog in Anlage 1</a></div>
+                <div><a href=”https://oet.bamf.de/ords/oetut/f?p=514:1:0” target=”_blank” rel=”noopener noreferrer”>BAMF-Fragenkatalog zur Vorbereitung</a></div>
+                <div><a href=”https://www.integrationsbeauftragte.de/resource/blob/1864184/2294768/402c323bf40582a4195c2e7026cc4c02/einbuergerung-broschuere-deu-data.pdf?download=1” target=”_blank” rel=”noopener noreferrer”>Broschüre „Mein Weg zum deutschen Pass”</a></div>
               </div>
             </div>
           </section>
@@ -1522,7 +1633,7 @@
         if (state.view === 'exam') html = renderExam();
         main.innerHTML = html;
         bindMainEvents();
-        document.getElementById('themeToggle').textContent = themeLabel();
+        document.getElementById('themeToggle').innerHTML = themeLabel();
       }
 
       function hydrateControls() {
@@ -1582,10 +1693,34 @@
         render();
       });
 
+      const layout = document.querySelector('.layout');
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const sidebarClose = document.getElementById('sidebarClose');
+      const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
+      function openSidebar() {
+        layout.classList.add('sidebar-open');
+        hamburgerBtn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeSidebar() {
+        layout.classList.remove('sidebar-open');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
+      hamburgerBtn.addEventListener('click', () => {
+        layout.classList.contains('sidebar-open') ? closeSidebar() : openSidebar();
+      });
+      sidebarClose.addEventListener('click', closeSidebar);
+      sidebarBackdrop.addEventListener('click', closeSidebar);
+
       navGroup.addEventListener('click', e => {
         const btn = e.target.closest('[data-view]');
         if (!btn) return;
         state.view = btn.dataset.view;
+        if (window.innerWidth <= 980) closeSidebar();
         render();
       });
 
