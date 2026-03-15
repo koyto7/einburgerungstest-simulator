@@ -3,7 +3,7 @@
 A free, open-source practice simulator for the official German citizenship test (*Einbürgerungstest*).
 All 460 questions — 300 general + 10 per state — sourced directly from the official [BAMF question catalogue](https://www.bamf.de/DE/Themen/Integration/ZugewanderteTeilnehmende/Einbuergerung/einbuergerung-node.html).
 
-**[→ Open the simulator](https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/)**
+**[→ Open the simulator](https://koyto7.github.io/einburgerungstest-simulator/)**
 
 Features:
 - Full exam simulation (33 random questions, 60-minute timer)
