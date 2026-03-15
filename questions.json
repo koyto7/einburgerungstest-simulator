@@ -1339,7 +1339,7 @@
     "localNumber": 59,
     "category": "general",
     "state": null,
-    "question": "Vor wie vielen Jahren gab es erstmals eine jüdische Gemeinde auf dem Gebiet des heutigen Deutschlands? □ vor etwa 300 Jahren □ vor etwa 700 Jahren □ vor etwa 1150 Jahren □ vor etwa 1700 Jahren",
+    "question": "Vor wie vielen Jahren gab es erstmals eine jüdische Gemeinde auf dem Gebiet des heutigen Deutschlands?",
     "options": [
       "vor etwa 300 Jahren",
       "vor etwa 700 Jahren",
@@ -1500,7 +1500,7 @@
     "localNumber": 66,
     "category": "general",
     "state": null,
-    "question": "Welche Städte haben die größten jüdischen Gemeinden in Deutschland? □ Berlin und München □ Hamburg und Essen □ Nürnberg und Stuttgart □ Worms und Speyer",
+    "question": "Welche Städte haben die größten jüdischen Gemeinden in Deutschland?",
     "options": [
       "Berlin und München",
       "Hamburg und Essen",
@@ -2190,7 +2190,7 @@
     "localNumber": 96,
     "category": "general",
     "state": null,
-    "question": "Wie kann jemand, der den Holocaust leugnet, bestraft werden? □ Kürzung sozialer Leistungen □ bis zu 100 Sozialstunden □ gar nicht, Holocaustleugnung ist erlaubt □ mit Freiheitsstrafe bis zu fünf Jahren oder mit Geldstrafe",
+    "question": "Wie kann jemand, der den Holocaust leugnet, bestraft werden?",
     "options": [
       "Kürzung sozialer Leistungen",
       "bis zu 100 Sozialstunden",
@@ -2696,7 +2696,7 @@
     "localNumber": 118,
     "category": "general",
     "state": null,
-    "question": "Wer darf bei den rund 40 jüdischen Makkabi-Sportvereinen Mitglied werden? □ nur Deutsche □ nur Israelis □ nur religiöse Menschen □ alle Menschen",
+    "question": "Wer darf bei den rund 40 jüdischen Makkabi-Sportvereinen Mitglied werden?",
     "options": [
       "nur Deutsche",
       "nur Israelis",
@@ -3409,7 +3409,7 @@
     "localNumber": 149,
     "category": "general",
     "state": null,
-    "question": "Was ist ein Beispiel für antisemitisches Verhalten? □ ein jüdisches Fest besuchen □ die israelische Regierung kritisieren □ den Holocaust leugnen □ gegen Juden Fußball spielen.",
+    "question": "Was ist ein Beispiel für antisemitisches Verhalten?",
     "options": [
       "ein jüdisches Fest besuchen",
       "die israelische Regierung kritisieren",
@@ -4168,7 +4168,7 @@
     "localNumber": 182,
     "category": "general",
     "state": null,
-    "question": "Wie heißt das jüdische Gebetshaus? □ Basilika □ Moschee □ Synagoge □ Kirche",
+    "question": "Wie heißt das jüdische Gebetshaus?",
     "options": [
       "Basilika",
       "Moschee",
@@ -4214,7 +4214,7 @@
     "localNumber": 184,
     "category": "general",
     "state": null,
-    "question": "184. Auf welcher rechtlichen Grundlage wurde der Staat Israel gegründet? □ eine Resolution der Vereinten Nationen □ ein Beschluss des Zionistenkongresses □ ein Vorschlag der Bundesregierung □ ein Vorschlag der UdSSR",
+    "question": "184. Auf welcher rechtlichen Grundlage wurde der Staat Israel gegründet?",
     "options": [
       "eine Resolution der Vereinten Nationen",
       "ein Beschluss des Zionistenkongresses",
@@ -4720,7 +4720,7 @@
     "localNumber": 206,
     "category": "general",
     "state": null,
-    "question": "206. Woran erinnern die sogenannten „Stolpersteine“ in Deutschland? □ an berühmte deutsche Politikerinnen und Politiker □ an die Opfer des Nationalsozialismus □ an Verkehrstote □ an bekannte jüdische Musiker",
+    "question": "206. Woran erinnern die sogenannten „Stolpersteine“ in Deutschland?",
     "options": [
       "an berühmte deutsche Politikerinnen und Politiker",
       "an die Opfer des Nationalsozialismus",
@@ -6606,7 +6606,7 @@
     "localNumber": 288,
     "category": "general",
     "state": null,
-    "question": "Woraus begründet sich Deutschlands besondere Verantwortung für Israel? □ aus der Mitgliedschaft in der Europäischen Union (EU) □ aus den nationalsozialistischen Verbrechen gegen Juden □ aus dem Grundgesetz der Bundesrepublik Deutschland □ aus der christlichen Tradition",
+    "question": "Woraus begründet sich Deutschlands besondere Verantwortung für Israel?",
     "options": [
       "aus der Mitgliedschaft in der Europäischen Union (EU)",
       "aus den nationalsozialistischen Verbrechen gegen Juden",
