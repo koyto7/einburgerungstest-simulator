@@ -86,7 +86,10 @@ jobs:
       - name: Compare scraped data with current questions.json
         id: update
         run: |
-          uv run python scripts/update_questions.py; EXIT_CODE=$?
+          set +e
+          uv run python scripts/update_questions.py
+          EXIT_CODE=$?
+          set -e
           if [ $EXIT_CODE -eq 0 ]; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           elif [ $EXIT_CODE -eq 2 ]; then
@@ -96,11 +99,6 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
             echo "validation_failed=false" >> "$GITHUB_OUTPUT"
           fi
-
-      # ── Validate current questions.json (always, as a safety net) ──────────
-      - name: Validate questions.json
-        if: steps.update.outputs.changed == 'true'
-        run: uv run python scripts/validate_questions.py
 
       # ── Create PR if changes detected ──────────────────────────────────────
       - name: Create update PR
