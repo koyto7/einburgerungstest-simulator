@@ -1,0 +1,96 @@
+name: Update questions.json
+
+on:
+  schedule:
+    # Runs at 04:00 UTC on the 1st of every month
+    - cron: '0 4 1 * *'
+  # Allow manual trigger from GitHub UI (Actions tab → Run workflow)
+  workflow_dispatch:
+
+permissions:
+  contents: write  # needed to commit questions.json back to the repo
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120  # scraping ~460 questions takes ~40-80 min
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── Python setup ────────────────────────────────────────────────────────
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install Python dependencies
+        run: uv sync
+
+      # ── Node setup ──────────────────────────────────────────────────────────
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      # --with-deps installs required system libs (libnss, libglib, etc.) on Ubuntu
+      - name: Install Playwright browser
+        run: npx playwright install chromium --with-deps
+
+      # ── Pipeline ────────────────────────────────────────────────────────────
+      - name: Parse PDF → question_bank_from_pdf.json
+        run: uv run python scripts/parse_pdf_questions.py
+
+      # General questions 1-300: use NRW to load the catalog
+      # (general questions are identical regardless of state selection)
+      - name: Scrape general questions (1–300)
+        run: |
+          node scripts/extract_answers_chunked.js \
+            "Nordrhein-Westfalen" 1 300 ./answers_general.json
+
+      # State-specific questions: 10 per state, 16 states
+      - name: Scrape state questions (all 16 states)
+        run: |
+          for state in \
+            "Baden-Württemberg" \
+            "Bayern" \
+            "Berlin" \
+            "Brandenburg" \
+            "Bremen" \
+            "Hamburg" \
+            "Hessen" \
+            "Mecklenburg-Vorpommern" \
+            "Niedersachsen" \
+            "Nordrhein-Westfalen" \
+            "Rheinland-Pfalz" \
+            "Saarland" \
+            "Sachsen" \
+            "Sachsen-Anhalt" \
+            "Schleswig-Holstein" \
+            "Thüringen"
+          do
+            safe="${state// /_}"
+            node scripts/extract_answers_chunked.js \
+              "$state" 1 10 "./state_answers_${safe}.json"
+          done
+
+      - name: Merge → questions.json
+        run: uv run python scripts/merge_question_bank.py
+
+      # ── Commit ──────────────────────────────────────────────────────────────
+      - name: Commit updated questions.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add questions.json
+          # Only commit if questions.json actually changed
+          git diff --cached --quiet && echo "No changes." || \
+            git commit -m "chore: update questions.json [$(date -u +%Y-%m-%d)]"
+          git push

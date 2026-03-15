@@ -1,0 +1,23 @@
+# Node
+node_modules/
+
+# CI scratch files — generated during the update pipeline, never committed
+question_bank_from_pdf.json
+answers_general.json
+answers_*.json
+state_answers_*.json
+
+# Downloaded PDF — fetched automatically by parse_pdf_questions.py
+gesamtfragenkatalog-lebenindeutschland.pdf
+
+# Python
+__pycache__/
+*.py[cod]
+build/
+dist/
+wheels/
+*.egg-info
+.venv/
+
+# macOS
+.DS_Store

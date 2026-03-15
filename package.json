@@ -1,0 +1,17 @@
+{
+  "name": "einbuergerungstest-simulator",
+  "version": "1.0.0",
+  "description": "Open-source Einbürgerungstest simulator with all 460 official BAMF questions",
+  "keywords": ["einbürgerungstest", "bamf", "deutschland", "citizenship", "german"],
+  "license": "MIT",
+  "type": "commonjs",
+  "scripts": {
+    "scrape:general": "node scripts/extract_answers_chunked.js \"Nordrhein-Westfalen\" 1 300 ./answers_general.json",
+    "scrape:state": "node scripts/extract_answers_chunked.js",
+    "merge": "python3 scripts/merge_question_bank.py",
+    "parse-pdf": "python3 scripts/parse_pdf_questions.py"
+  },
+  "dependencies": {
+    "playwright": "^1.58.2"
+  }
+}
