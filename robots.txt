@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://koyto7.github.io/einburgerungstest-simulator/sitemap.xml
