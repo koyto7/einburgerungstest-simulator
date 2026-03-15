@@ -353,7 +353,7 @@
         display: flex;
         justify-content: space-between;
         gap: 12px;
-        align-items: start;
+        align-items: center;
       }
       .attempt-meta {
         color: var(--muted);
@@ -443,6 +443,8 @@
         border-radius: 16px;
         padding: 15px 16px;
         min-height: 52px;
+        user-select: text;
+        -webkit-user-select: text;
       }
       .option.selected {
         border-color: var(--primary);
@@ -621,6 +623,13 @@
                 <option value="untimed">Ohne Zeitlimit</option>
               </select>
             </div>
+            <div>
+              <label class="label" for="feedbackSelect">Sofort-Feedback</label>
+              <select id="feedbackSelect">
+                <option value="off">Aus (klassisch)</option>
+                <option value="on">An (sofort richtig/falsch)</option>
+              </select>
+            </div>
             <button class="action-btn" id="startSimulation">
               Prüfung starten
             </button>
@@ -711,6 +720,7 @@
         state: 'Nordrhein-Westfalen',
         timed: true,
         theme: null,
+        instantFeedback: false,
       };
       const state = {
         view: 'dashboard',
@@ -732,6 +742,7 @@
       const navGroup = document.getElementById('navGroup');
       const stateSelect = document.getElementById('stateSelect');
       const timedSelect = document.getElementById('timedSelect');
+      const feedbackSelect = document.getElementById('feedbackSelect');
       const resumeButton = document.getElementById('resumeButton');
 
       function loadJson(key, fallback) {
@@ -1392,7 +1403,7 @@
               <div class="question-meta">Offizieller Fragenpool · Frage ${question.number}</div>
               <div class="question-text">${escapeHtml(question.question)}</div>
               ${
-                visual && question.imageUrl
+                (visual || question.question.includes('©')) && question.imageUrl
                   ? `
                 <div class="question-image">
                   <img src="${question.imageUrl}" alt="Abbildung zu Frage ${question.number}" loading="lazy" decoding="async" />
@@ -1403,11 +1414,20 @@
               <div class="options">
                 ${question.options
                   .map(
-                    (opt, idx) => `
-                  <button class="option ${selectedIndex === idx ? 'selected' : ''}" data-answer="${idx}">
+                    (opt, idx) => {
+                      let cls = 'option';
+                      if (state.settings.instantFeedback && selectedIndex !== null) {
+                        if (idx === question.correctIndex) cls += ' correct';
+                        else if (idx === selectedIndex) cls += ' wrong';
+                      } else if (selectedIndex === idx) {
+                        cls += ' selected';
+                      }
+                      return `
+                  <button class="${cls}" data-answer="${idx}">
                     <strong style="margin-right:8px;">${String.fromCharCode(65 + idx)}.</strong> ${escapeHtml(opt)}
                   </button>
-                `,
+                `;
+                    },
                   )
                   .join('')}
               </div>
@@ -1443,6 +1463,7 @@
 
         main.querySelectorAll('[data-answer]').forEach(btn => {
           btn.addEventListener('click', () => {
+            if (window.getSelection && window.getSelection().toString().length > 0) return;
             if (!state.session) return;
             const qid = state.session.questionIds[state.session.currentIndex];
             state.session.answers[qid] = Number(btn.dataset.answer);
@@ -1505,6 +1526,7 @@
         ).join('');
         stateSelect.value = state.settings.state;
         timedSelect.value = state.settings.timed ? 'timed' : 'untimed';
+        feedbackSelect.value = state.settings.instantFeedback ? 'on' : 'off';
       }
 
       stateSelect.addEventListener('change', () => {
@@ -1515,6 +1537,12 @@
 
       timedSelect.addEventListener('change', () => {
         state.settings.timed = timedSelect.value === 'timed';
+        persistSettings();
+        render();
+      });
+
+      feedbackSelect.addEventListener('change', () => {
+        state.settings.instantFeedback = feedbackSelect.value === 'on';
         persistSettings();
         render();
       });
