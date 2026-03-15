@@ -221,13 +221,26 @@ def main():
     for e in result["errors"]:
         print(f"  FAIL: {e}")
 
+    # Always write candidate to questions.json so the PR shows the diff.
+    # The PR body will include validation warnings/errors for the reviewer.
+    print("\nReplacing questions.json with candidate for PR review...")
+    CANDIDATE_PATH.rename(CURRENT_PATH)
+
+    # Append validation results to the report
     if result["errors"]:
-        print("\nCANDIDATE FAILED VALIDATION — will not replace questions.json")
-        print("Review update_report.md and questions_candidate.json manually.")
+        with open(REPORT_PATH, "a", encoding="utf-8") as f:
+            f.write("\n## Validation Errors\n\n")
+            for e in result["errors"]:
+                f.write(f"- {e}\n")
+        print("\nCANDIDATE HAS VALIDATION ERRORS — PR will be created for review.")
         sys.exit(2)
 
-    print("\nValidation passed. Replacing questions.json with candidate.")
-    CANDIDATE_PATH.rename(CURRENT_PATH)
+    if result["warnings"]:
+        with open(REPORT_PATH, "a", encoding="utf-8") as f:
+            f.write("\n## Validation Warnings\n\n")
+            for w in result["warnings"]:
+                f.write(f"- {w}\n")
+
     print("Done — questions.json updated successfully.")
 
 
