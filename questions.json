@@ -2518,8 +2518,13 @@
     "localNumber": 111,
     "category": "general",
     "state": null,
-    "question": "Welche Handlungen mit Bezug auf den Staat Israel sind in Deutschland verboten? □ die Politik Israels öffentlich kritisieren □ das Aufhängen einer israelischen Flagge auf dem Privatgrundstück □ eine Diskussion über die Politik Israels □ der öffentliche Aufruf zur Vernichtung Israels",
-    "options": [],
+    "question": "Welche Handlungen mit Bezug auf den Staat Israel sind in Deutschland verboten?",
+    "options": [ 
+      "die Politik Israels öffentlich kritisieren",
+      "das Aufhängen einer israelischen Flagge auf dem Privatgrundstück",
+      "eine Diskussion über die Politik Israels",
+      "der öffentliche Aufruf zur Vernichtung Israels"
+    ],
     "isImageQuestion": false,
     "correctIndex": 3,
     "imageUrl": null,
