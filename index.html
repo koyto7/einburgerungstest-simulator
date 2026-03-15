@@ -76,15 +76,15 @@
     />
     <style>
       :root {
-        --bg: #f5f3ee;
-        --surface: #fcfbf8;
-        --surface-2: #efebe3;
-        --surface-3: #e7e2d9;
-        --text: #1f1b16;
-        --muted: #665f56;
-        --border: #d7d0c4;
-        --primary: #0b5d63;
-        --primary-2: #0e7077;
+        --bg: #faf9f5;
+        --surface: #ffffff;
+        --surface-2: #f0ece5;
+        --surface-3: #e6e0d6;
+        --text: #1a1714;
+        --muted: #6b6158;
+        --border: #d8d2c8;
+        --primary: #cf6930;
+        --primary-2: #b55a22;
         --success: #2f6f2a;
         --danger: #9c2e43;
         --warning: #8a5617;
@@ -93,19 +93,19 @@
         --radius-sm: 12px;
       }
       [data-theme='dark'] {
-        --bg: #141311;
-        --surface: #1c1a17;
-        --surface-2: #23201c;
-        --surface-3: #2c2823;
+        --bg: #1a1714;
+        --surface: #221e1a;
+        --surface-2: #2a2520;
+        --surface-3: #33302a;
         --text: #ede8df;
-        --muted: #b5ac9f;
-        --border: #3a362f;
-        --primary: #59a2ab;
-        --primary-2: #74bcc4;
+        --muted: #a09488;
+        --border: #3d3830;
+        --primary: #e8915a;
+        --primary-2: #f0a870;
         --success: #76b36b;
         --danger: #dc6a87;
         --warning: #d49a4d;
-        --shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+        --shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
       }
       * {
         box-sizing: border-box;
@@ -666,12 +666,7 @@
       </div>
 
       <footer class="footer">
-        <a
-          href="https://www.perplexity.ai/computer"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Created with Perplexity Computer</a
-        >
+        <span>Einbürgerungstest Simulator</span>
       </footer>
     </div>
 
@@ -1573,8 +1568,11 @@
             state.view === 'exam' &&
             state.session &&
             state.session.durationSeconds != null
-          )
+          ) {
+            const sel = window.getSelection();
+            if (sel && sel.toString().length > 0) return;
             render();
+          }
         }, 1000);
       }
       bootTimer();
