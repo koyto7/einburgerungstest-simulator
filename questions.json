@@ -306,8 +306,10 @@
     "state": null,
     "question": "Meinungsfreiheit in Deutschland heißt, dass ich…",
     "options": [
-      "Passanten auf der Straße beschimpfen darf. meine Meinung im Internet äußern kann.",
-      "Nazi-, Hamas- oder Islamischer Staat-Symbole öffentlich tragen darf. meine Meinung nur dann äußern darf, solange ich der Regierung nicht widerspreche."
+      "Passanten auf der Straße beschimpfen darf",
+      "meine Meinung im Internet äußern kann",
+      "Nazi-, Hamas- oder Islamischer Staat-Symbole öffentlich tragen darf",
+      "meine Meinung nur dann äußern darf, solange ich der Regierung nicht widerspreche"
     ],
     "isImageQuestion": false,
     "correctIndex": 1,
