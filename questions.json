@@ -1252,7 +1252,7 @@
       "das Bundesratsgebäude in Berlin",
       "das Bundeskanzleramt in Berlin"
     ],
-    "isImageQuestion": false,
+    "isImageQuestion": true,
     "correctIndex": 0,
     "imageUrl": "https://oet.bamf.de/ords/oetut/f?p=514:30::APPLICATION_PROCESS%3Dshow_pag_bild:::F514_PAG_THUMBNAIL,F514_PAG_BILD:,17234",
     "officialOptions": [
@@ -1587,7 +1587,7 @@
       "Sie/Er wählt die Ministerinnen/Minister aus.",
       "Sie/Er schlägt die Kanzlerin/den Kanzler zur Wahl vor."
     ],
-    "isImageQuestion": false,
+    "isImageQuestion": true,
     "correctIndex": 3,
     "imageUrl": "https://oet.bamf.de/ords/oetut/f?p=514:30::APPLICATION_PROCESS%3Dshow_pag_bild:::F514_PAG_THUMBNAIL,F514_PAG_BILD:,17212",
     "officialOptions": [
@@ -4120,7 +4120,7 @@
       "Er zeigte seine Demut vor dem Warschauer Pakt.",
       "Er sprach ein Gebet am Grab des Unbekannten Soldaten."
     ],
-    "isImageQuestion": false,
+    "isImageQuestion": true,
     "correctIndex": 1,
     "imageUrl": "https://oet.bamf.de/ords/oetut/f?p=514:30::APPLICATION_PROCESS%3Dshow_pag_bild:::F514_PAG_THUMBNAIL,F514_PAG_BILD:,17428",
     "officialOptions": [
@@ -4910,7 +4910,7 @@
       "der Reichsadler",
       "die Reichskrone"
     ],
-    "isImageQuestion": false,
+    "isImageQuestion": true,
     "correctIndex": 0,
     "imageUrl": "https://oet.bamf.de/ords/oetut/f?p=514:30::APPLICATION_PROCESS%3Dshow_pag_bild:::F514_PAG_THUMBNAIL,F514_PAG_BILD:,17255",
     "officialOptions": [
@@ -5347,7 +5347,7 @@
       "Frieden und Sicherheit in den Ländern der EU",
       "einheitliche Feiertage in den Ländern der EU"
     ],
-    "isImageQuestion": false,
+    "isImageQuestion": true,
     "correctIndex": 2,
     "imageUrl": "https://oet.bamf.de/ords/oetut/f?p=514:30::APPLICATION_PROCESS%3Dshow_pag_bild:::F514_PAG_THUMBNAIL,F514_PAG_BILD:,17314",
     "officialOptions": [

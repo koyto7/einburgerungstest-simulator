@@ -806,6 +806,7 @@
       }
 
       function isVisualQuestion(question) {
+        if (question.isImageQuestion) return true;
         const opts = question.options || [];
         const normalized = opts.map(opt => opt.trim());
         const isBild = normalized.every(opt => /^Bild\s?[1-4]$/i.test(opt));
@@ -1403,7 +1404,7 @@
               <div class="question-meta">Offizieller Fragenpool · Frage ${question.number}</div>
               <div class="question-text">${escapeHtml(question.question)}</div>
               ${
-                (visual || question.question.includes('©')) && question.imageUrl
+                visual && question.imageUrl
                   ? `
                 <div class="question-image">
                   <img src="${question.imageUrl}" alt="Abbildung zu Frage ${question.number}" loading="lazy" decoding="async" />
