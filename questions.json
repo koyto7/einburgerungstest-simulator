@@ -1338,7 +1338,12 @@
     "category": "general",
     "state": null,
     "question": "Vor wie vielen Jahren gab es erstmals eine jüdische Gemeinde auf dem Gebiet des heutigen Deutschlands? □ vor etwa 300 Jahren □ vor etwa 700 Jahren □ vor etwa 1150 Jahren □ vor etwa 1700 Jahren",
-    "options": [],
+    "options": [
+      "vor etwa 300 Jahren",
+      "vor etwa 700 Jahren",
+      "vor etwa 1150 Jahren",
+      "vor etwa 1700 Jahren"
+    ],
     "isImageQuestion": false,
     "correctIndex": 3,
     "imageUrl": null,
@@ -1494,7 +1499,12 @@
     "category": "general",
     "state": null,
     "question": "Welche Städte haben die größten jüdischen Gemeinden in Deutschland? □ Berlin und München □ Hamburg und Essen □ Nürnberg und Stuttgart □ Worms und Speyer",
-    "options": [],
+    "options": [
+      "Berlin und München",
+      "Hamburg und Essen",
+      "Nürnberg und Stuttgart",
+      "Worms und Speyer"
+    ],
     "isImageQuestion": false,
     "correctIndex": 0,
     "imageUrl": null,
@@ -2179,7 +2189,12 @@
     "category": "general",
     "state": null,
     "question": "Wie kann jemand, der den Holocaust leugnet, bestraft werden? □ Kürzung sozialer Leistungen □ bis zu 100 Sozialstunden □ gar nicht, Holocaustleugnung ist erlaubt □ mit Freiheitsstrafe bis zu fünf Jahren oder mit Geldstrafe",
-    "options": [],
+    "options": [
+      "Kürzung sozialer Leistungen",
+      "bis zu 100 Sozialstunden",
+      "gar nicht, Holocaustleugnung ist erlaubt",
+      "mit Freiheitsstrafe bis zu fünf Jahren oder mit Geldstrafe"
+    ],
     "isImageQuestion": false,
     "correctIndex": 3,
     "imageUrl": null,
@@ -2680,7 +2695,12 @@
     "category": "general",
     "state": null,
     "question": "Wer darf bei den rund 40 jüdischen Makkabi-Sportvereinen Mitglied werden? □ nur Deutsche □ nur Israelis □ nur religiöse Menschen □ alle Menschen",
-    "options": [],
+    "options": [
+      "nur Deutsche",
+      "nur Israelis",
+      "nur religiöse Menschen",
+      "alle Menschen"
+    ],
     "isImageQuestion": false,
     "correctIndex": 3,
     "imageUrl": null,
@@ -3388,7 +3408,12 @@
     "category": "general",
     "state": null,
     "question": "Was ist ein Beispiel für antisemitisches Verhalten? □ ein jüdisches Fest besuchen □ die israelische Regierung kritisieren □ den Holocaust leugnen □ gegen Juden Fußball spielen.",
-    "options": [],
+    "options": [
+      "ein jüdisches Fest besuchen",
+      "die israelische Regierung kritisieren",
+      "den Holocaust leugnen",
+      "gegen Juden Fußball spielen"
+    ],
     "isImageQuestion": false,
     "correctIndex": 2,
     "imageUrl": null,
@@ -4142,7 +4167,12 @@
     "category": "general",
     "state": null,
     "question": "Wie heißt das jüdische Gebetshaus? □ Basilika □ Moschee □ Synagoge □ Kirche",
-    "options": [],
+    "options": [
+      "Basilika",
+      "Moschee",
+      "Synagoge",
+      "Kirche"
+    ],
     "isImageQuestion": false,
     "correctIndex": 2,
     "imageUrl": null,
@@ -4183,7 +4213,12 @@
     "category": "general",
     "state": null,
     "question": "184. Auf welcher rechtlichen Grundlage wurde der Staat Israel gegründet? □ eine Resolution der Vereinten Nationen □ ein Beschluss des Zionistenkongresses □ ein Vorschlag der Bundesregierung □ ein Vorschlag der UdSSR",
-    "options": [],
+    "options": [
+      "eine Resolution der Vereinten Nationen",
+      "ein Beschluss des Zionistenkongresses",
+      "ein Vorschlag der Bundesregierung",
+      "ein Vorschlag der UdSSR"
+    ],
     "isImageQuestion": false,
     "correctIndex": 0,
     "imageUrl": null,
@@ -4684,7 +4719,12 @@
     "category": "general",
     "state": null,
     "question": "206. Woran erinnern die sogenannten „Stolpersteine“ in Deutschland? □ an berühmte deutsche Politikerinnen und Politiker □ an die Opfer des Nationalsozialismus □ an Verkehrstote □ an bekannte jüdische Musiker",
-    "options": [],
+    "options": [
+      "an berühmte deutsche Politikerinnen und Politiker",
+      "an die Opfer des Nationalsozialismus",
+      "an Verkehrstote",
+      "an bekannte jüdische Musiker"
+    ],
     "isImageQuestion": false,
     "correctIndex": 1,
     "imageUrl": null,
@@ -6565,7 +6605,12 @@
     "category": "general",
     "state": null,
     "question": "Woraus begründet sich Deutschlands besondere Verantwortung für Israel? □ aus der Mitgliedschaft in der Europäischen Union (EU) □ aus den nationalsozialistischen Verbrechen gegen Juden □ aus dem Grundgesetz der Bundesrepublik Deutschland □ aus der christlichen Tradition",
-    "options": [],
+    "options": [
+      "aus der Mitgliedschaft in der Europäischen Union (EU)",
+      "aus den nationalsozialistischen Verbrechen gegen Juden",
+      "aus dem Grundgesetz der Bundesrepublik Deutschland",
+      "aus der christlichen Tradition"
+    ],
     "isImageQuestion": false,
     "correctIndex": 1,
     "imageUrl": null,
